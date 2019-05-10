@@ -1,0 +1,175 @@
+<!doctype html>
+
+<html>
+	<head>
+		<title>Cadastro de Aluno</title>
+		<meta charset="utf-8" />
+		<style>
+			#menor{
+				font-size: 12px;
+				color:midnightblue;
+				}
+			.body{
+				font-family: sans-serif, Arial;}
+			table{
+				font-size: 12px;}
+			body{
+				background: -webkit-gradient(linear, left top, right top, from(rgb(255, 255, 255)), to(#eeedf7));
+			}
+		</style>
+	</head>
+
+	<body class="body">
+
+	<table>
+			<tr><td><img src="imagens/sce_quadrado.png" height="120/" width="230" ></td></tr>
+			<tr><td><h2>Cadastre o Novo Aluno Abaixo</h2></td></tr>
+			<tr><td colspan="2"><a href="Página Inicial.html">
+				   Página Inicial		|  </a>
+			<a href="Edição de Cadastros.html">
+					Edição de cadastro </a>
+			</table>
+		<form action="" class="ls-form ls-form-horizontal row">
+		<fieldset> <legend>Dados do Aluno</legend>
+		Nome
+        <label class="ls-label col-md-4">
+        <div class="ls-prefix-group">
+        <input type="text" data-ls-module="charCounter" maxlength="100" name="nome" placeholder="Nome completo" required>
+        <span class="ls-label-text-prefix ls-ico-user"></span>
+        </div></label><br />
+
+            Data de Nascimento 
+            <input id="date" type="date" name="nascimento" required> <br/><br />
+
+            Série de Ingresso  
+			<select name="serie">
+                    <option>1º Ano</option><option>2º Ano</option>
+                    <option>3º Ano</option><option>4º Ano</option>
+                    <option>5º Ano</option><option>6º Ano</option>
+                    <option>7º Ano</option><option>8º Ano</option>
+                    <option>9º Ano</option>
+                </select>
+                <br /><br />
+			<table><tr>
+            <td>Sexo :</td>
+			<td><input type="radio" name="sexo" id="masc" /><label for="masc"> Masculino</label></td>
+            <td><input type="radio" name="sexo" id="fem"/><label for="fem">Feminino</label></td>
+            </tr></table><br />
+		</fieldset>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<br><br>
+
+<fieldset><legend>Endereço </legend>
+<label for="cep">CEP</label>
+		<input id="cep" type="text" name="CEP" required/><br><br>
+<label for="logradouro">Rua</label>
+		<input id="logradouro" type="text" name="logradouro" maxlength="120" required/><br><br>
+<label for="numero">Número</label>
+		<input id="numero" type="number" name="numero" min="1" maxlength="8"/><br><br>
+<label for="complemento" >Complemento</label>
+		<input id="complemento" type="text" name="complemento" maxlength="50"/><br><br>
+<label for="bairro">Bairro</label>
+		<input id="bairro" type="text" name="bairro" maxlength="100" required/><br><br>
+<label for="uf">Estado</label>
+		<select id="uf" name="UF">
+			<option value="AC">Acre</option>
+			<option value="AL">Alagoas</option>
+			<option value="AP">Amapá</option>
+			<option value="AM">Amazonas</option>
+			<option value="BA">Bahia</option>
+			<option value="CE">Ceará</option>
+			<option value="DF">Distrito Federal</option>
+			<option value="ES">Espírito Santo</option>
+			<option value="GO">Goiás</option>
+			<option value="MA">Maranhão</option>
+			<option value="MT">Mato Grosso</option>
+			<option value="MS">Mato Grosso do Sul</option>
+			<option value="MG">Minas Gerais</option>
+			<option value="PA">Pará</option>
+			<option value="PB">Paraíba</option>
+			<option value="PR">Paraná</option>
+			<option value="PE">Pernambuco</option>
+			<option value="PI">Piauí</option>
+			<option value="RJ">Rio de Janeiro</option>
+			<option value="RN">Rio Grande do Norte</option>
+			<option value="RS">Rio Grande do Sul</option>
+			<option value="RO">Rondônia</option>
+			<option value="RR">Roraima</option>
+			<option value="SC">Santa Catarina</option>
+			<option value="SP">São Paulo</option>
+			<option value="SE">Sergipe</option>
+			<option value="TO">Tocantins</option>
+        </select>
+	</fieldset>
+        <script type="text/javascript">
+            $("#cep").focusout(function(){	 });
+        </script>
+
+<script type="text/javascript">
+	$("#cep").focusout(function(){
+		$.ajax({
+			url: 'https://viacep.com.br/ws/'+$(this).val()+'/json/unicode/',
+			dataType: 'json',
+			success: function(resposta){
+				$("#logradouro").val(resposta.logradouro);
+				$("#complemento").val(resposta.complemento);
+				$("#bairro").val(resposta.bairro);
+				$("#cidade").val(resposta.localidade);
+				$("#uf").val(resposta.uf);
+				$("#numero").focus();
+			}
+		});
+	});
+</script><br><br>
+
+
+
+    <fieldset><legend>Dados do Responsável</legend>
+        <label class="ls-label col-md-4">
+        <div class="ls-prefix-group">
+        <input type="text" data-ls-module="charCounter" maxlength="100" name="nomeDaMae" placeholder="Nome completo" required>
+        <span class="ls-label-text-prefix ls-ico-user"></span>
+        </div></label><br />
+
+    CPF do Responsável <a id="menor">(Somente números)</a>
+    <input type="text" name="cpf" size="9" maxlength="9"> - <input type="text" name="cpf2" size="2" maxlength="2">
+	<br /><br />
+	
+	Dia da validade de mensalidades:<br>
+		<select name="validade" required>
+			<option>1</option>
+			<option>5</option>
+			<option>10</option>
+			<option>15</option>
+			<option>20</option>
+			<option>30</option>
+		</select> <br><br />
+		<input type="submit" value="Cadastrar" onclick="alert('Cadastro realizado com sucesso.')" />
+	</fieldset>
+	</form>
+	<script>
+		function enviarDados(){
+			var nome=document.get("nome").value
+			var nascimento=document.get("nascimento").value
+			var serie=document.get("nome").value
+			var sexo=document.get("nome").value
+			var CEP=document.get("cep").value
+			var logradouro=document.get("logradouro").value
+			var numero=document.get("numero").value
+			var complemento=document.get("complemento").value
+			var bairro=document.get("bairro").value
+			var UF=document.get("UF").value
+			var nomeDaMae=document.get("nomeDaMae").value
+			var cpf=document.get("cpf").value
+			var cpf2=document.get("cpf2").value
+			var validade=document.get("validade").value
+			
+			if
+		}
+	</script>
+	<script src="cadastrarAluno.js"></script>
+
+	</body>
+
+</html>
